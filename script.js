@@ -4,8 +4,6 @@
 var btnCharacters = document.getElementById("Characters");
 var output = document.getElementById("output");
 var API_URL = "https://rickandmortyapi.com/api/character"; // Cambiado de 'url' a 'API_URL'
-var paginaActual = 1; // Variable declarada
-var totalPaginas = 1; // Variable declarada
 
 // Función para cargar personajes con paginación
 async function cargarPersonajes(pagina = 1) {
@@ -20,12 +18,8 @@ async function cargarPersonajes(pagina = 1) {
         }
 
         const data = await response.json();
-        
-        paginaActual = pagina;
-        totalPaginas = data.info.pages;
 
         mostrarPersonajes(data.results);
-        crearPaginacion(data.info);
 
     } catch (error) {
         console.error('Error:', error);
@@ -36,20 +30,16 @@ async function cargarPersonajes(pagina = 1) {
 // Función para buscar personajes con filtros
 async function buscarPersonajes() {
     // Obtener valores de los filtros (con verificación de existencia)
-    const nombre = document.getElementById('name')?.value || '';
-    const status = document.getElementById('status')?.value || '';
-    const species = document.getElementById('species')?.value || '';
-    const gender = document.getElementById('gender')?.value || '';
+    const nombre = document.getElementById('name');
+    const status = document.getElementById('status');
+    const species = document.getElementById('species');
+    const gender = document.getElementById('gender');
 
     const resultado = document.getElementById('output');
     resultado.innerHTML = '<div class="loading">🔍 Buscando personajes...</div>';
 
     // Construir URL con parámetros
-    let urlBusqueda = `${API_URL}?page=1`; // Cambiado de 'url' a 'urlBusqueda'
-    if (nombre) urlBusqueda += `&name=${nombre}`;
-    if (status) urlBusqueda += `&status=${status}`;
-    if (species) urlBusqueda += `&species=${species}`;
-    if (gender) urlBusqueda += `&gender=${gender}`;
+    let urlBusqueda = `${API_URL}`; // Cambiado de 'url' a 'urlBusqueda'
 
     try {
         const response = await fetch(urlBusqueda);
@@ -62,7 +52,6 @@ async function buscarPersonajes() {
         
         totalPaginas = data.info.pages;
         mostrarPersonajes(data.results);
-        crearPaginacion(data.info);
 
     } catch (error) {
         console.error('Error:', error);
@@ -103,31 +92,6 @@ function mostrarPersonajes(personajes) {
     resultado.innerHTML = html;
 }
 
-// Función para crear la paginación
-function crearPaginacion(info) {
-    const paginacion = document.getElementById('pagination');
-    
-    // Verificar si existe el elemento de paginación
-    if (!paginacion) {
-        console.warn('No se encontró el elemento con id "pagination"');
-        return;
-    }
-    
-    let html = '';
-
-    // Botón anterior
-    html += `<button onclick="cargarPersonajes(${paginaActual - 1})" 
-             ${!info.prev ? 'disabled' : ''}>⬅️ Anterior</button>`;
-
-    // Número de página actual
-    html += `<span>Página ${paginaActual} de ${totalPaginas}</span>`;
-
-    // Botón siguiente
-    html += `<button onclick="cargarPersonajes(${paginaActual + 1})" 
-             ${!info.next ? 'disabled' : ''}>Siguiente ➡️</button>`;
-
-    paginacion.innerHTML = html;
-}
 
 // Event listener para el botón
 btnCharacters.addEventListener("click", buscarPersonajes);
