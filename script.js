@@ -1,96 +1,61 @@
 "use StrictMode";
-// Clase 11
+const personajesElemento = document.getElementById('personajes');
+const nombreFiltroElemento = document.getElementById('nombreFiltro');
+const estadoFiltroElemento = document.getElementById('estadoFiltro');
 
-// Variables globales
-var btnCharacters = document.getElementById("Characters");
-var output = document.getElementById("output");
-var API_URL = "https://rickandmortyapi.com/api/character"; // Cambiado de 'url' a 'API_URL'
+// tenemos que crear la funcion que haga el llamado a la api
 
-// Función para cargar personajes con paginación
-async function cargarPersonajes() {
-    const resultado = document.getElementById('output'); // Cambiado de 'resultado' a 'output'
-    resultado.innerHTML = '<div class="loading">⏳ Cargando personajes...</div>';
+async function obtenerPersonajes (name, status){
 
-    try {
-        const response = await fetch(`${API_URL}`);
-        
-        if (!response.ok) {
-            throw new Error('Error al cargar los personajes');
+    let url = 'https://rickandmortyapi.com/api/character/';
+    if (name || status){
+        url += '?';
+        if(name){
+            url += `name=${name}&`;
         }
 
-        const data = await response.json();
-        mostrarPersonajes(data.results);
-
-    } catch (error) {
-        console.error('Error:', error);
-        resultado.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
-    }
-}
-
-// Función para buscar personajes con filtros
-async function buscarPersonajes() {
-    // Obtener valores de los filtros (con verificación de existencia)
-    const nombre = document.getElementById('name');
-    const status = document.getElementById('status');
-    const species = document.getElementById('species');
-    const gender = document.getElementById('gender');
-
-    const resultado = document.getElementById('output');
-    // Construir URL con parámetros
-    let urlBusqueda = `${API_URL}+ "/?" + nombre.value + status.value +species.value + gender.value`; // Cambiado de 'url' a 'urlBusqueda'
-
-    try {
-        const response = await fetch(urlBusqueda);
-        
-        if (!response.ok) {
-            throw new Error('No se encontraron personajes con esos criterios');
+        if(status){
+            url += `status=${status}`;
         }
-
-        const data = await response.json();
-        
-        totalPaginas = data.info.pages;
-        mostrarPersonajes(data.results);
-
-    } catch (error) {
-        console.error('Error:', error);
-        resultado.innerHTML = `<div class="error">❌ ${error.message}</div>`;
     }
+    const response = await fetch(url);
+    const data = await response.json(); 
+
+    return data.results;
 }
 
-// Función para mostrar personajes en el DOM
-function mostrarPersonajes(personajes) {
-    const resultado = document.getElementById('output');
+// la funcion que va a renderizar
+
+async function verPersonajes (name, status) {
     
-    let html = '<div class="characters-grid">';
+    // Obtener los personajes filtrados
+    const personajesElemento = await obtenerPersonajes(name, status);
     
-    personajes.forEach(personaje => {
-        html += `
-            <div class="character-card">
-                <img src="${personaje.image}" alt="${personaje.name}" class="character-image">
-                <div class="character-info">
-                    <div class="character-name">${personaje.name}</div>
-                    <div class="character-detail">
-                        <strong>Estado:</strong> ${personaje.status}
-                    </div>
-                    <div class="character-detail">
-                        <strong>Especie:</strong> ${personaje.species}
-                    </div>
-                    <div class="character-detail">
-                        <strong>Género:</strong> ${personaje.gender}
-                    </div>
-                    <div class="character-detail">
-                        <strong>Origen:</strong> ${personaje.origin.name}
-                    </div>
-                </div>
-            </div>
+    personajesElemento.innerHTML = '';
+
+    // renderizar los personajes
+    for( let personaje of personajesElemento ){
+        const tarjeta = document.createElement('div');
+        tarjeta.classList.add('tarjetaPersonaje');
+
+        tarjeta.innerHTML = `
+            <img src="${personaje.image}" />
+            <h2> ${personaje.name} </h2>
+            <p> Status: ${personaje.status} </p>
+            <p> Especie: ${personaje.species} </p>
         `;
-    });
-    
-    html += '</div>';
-    resultado.innerHTML = html;
+        personajesElemento.appendChild(tarjeta);
+
+    }
+
 }
 
+verPersonajes();
 
-// Event listener para el botón
-btnCharacters.addEventListener("click", buscarPersonajes);
+personajesElemento.addEventListener('input', () => {
+    displayCharacters(personajesElemento.value, estadoFiltroElemento .value );
+});
 
+estadoFiltroElemento .addEventListener('change', () => {
+    displayCharacters(personajesElemento.value, estadoFiltroElemento .value );
+});

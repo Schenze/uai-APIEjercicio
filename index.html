@@ -1,67 +1,30 @@
 <!DOCTYPE html>
-<html> 
-<body>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick y morty</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="normalize.css">
-    <script src="script2.js" ></script>
 </head>
+<body>
 
+    <h1>Buscador de rick</h1>
 
-    <header id="header001">
-    </header>
-    <section >
-          <div>
-            <!--<button id="personaje">GET Personajes</button>-->
-            <!--<button id="users-async">GET con async/await</button>-->
-          </div>
-          <div id="personajes"></div>
-    </section>
-        
-    <form id="form001">
-        <!-- hacer esto para los inputs-->
-        <div>
-        <label for="name" id="labelcharacter">Personaje: </label>
-        <input id="name" name="name" type="text">
+    <div id="filtros">
+        <input type="text" id="name-filter" placeholder="Filtrado por nombre" >
+        <select id="status-filter">
+            <option value="">Filtrar por estado</option>
+            <option value="alive">Vivo</option>
+            <option value="dead">Muerto</option>
+            <option value="unknown">Desconocido</option>
+        </select>
+    </div>
+
+    <div class="divcontenedor">
+        <div id="personajes">
+            <!-- Los personajes -->
         </div>
-
-        <div>
-
-        </div>
-
-        <div>
-            <select name="species">
-            <option value="">Todas las especies</option>
-                <option value="human">Humano</option>
-                <option value="alien">Alien</option>
-                <option value="robot">Robot</option>
-                <option value="cronenberg">Cronenberg</option>
-            </select>
-        </div>
-
-        <div>
-            <label>Genero: </label>
-            <select name="gender"> 
-                <option value="">TODOS</option>
-                <option value="female">FEMENINO</option>
-                <option value="male">MASCULINO</option>
-                <option value="genderless">SIN GENERO</option>
-                <option value="unknown">DESCONOCIDO</option>
-            </select>
-        </div>
-
-        <div>
-            <label>Estado: </label>
-            <select name="status">
-                <option value="">TODOS</option> 
-                <option value="alive">VIVO</option>
-                <option value="dead">MUERTO</option>
-                <option value="unknown">DESCONOCIDO</option>
-            </select>
-        </div>
-        <label for="enviar">Enviar</label>
-        <input id="enviar" name="enviar" type="submit">
-    </form>
-    
-    <footer>
-    </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
