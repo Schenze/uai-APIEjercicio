@@ -53,9 +53,9 @@ async function verPersonajes (name, status) {
 verPersonajes();
 
 personajesElemento.addEventListener('input', () => {
-    displayCharacters(personajesElemento.value, estadoFiltroElemento .value );
+    verPersonajes(personajesElemento.value, estadoFiltroElemento .value );
 });
 
 estadoFiltroElemento .addEventListener('change', () => {
-    displayCharacters(personajesElemento.value, estadoFiltroElemento .value );
+    verPersonajes(personajesElemento.value, estadoFiltroElemento .value );
 });
