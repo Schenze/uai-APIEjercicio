@@ -1,3 +1,4 @@
+"use StrictMode";
 // Clase 11
 
 // Variables globales
@@ -6,19 +7,18 @@ var output = document.getElementById("output");
 var API_URL = "https://rickandmortyapi.com/api/character"; // Cambiado de 'url' a 'API_URL'
 
 // Función para cargar personajes con paginación
-async function cargarPersonajes(pagina = 1) {
+async function cargarPersonajes() {
     const resultado = document.getElementById('output'); // Cambiado de 'resultado' a 'output'
     resultado.innerHTML = '<div class="loading">⏳ Cargando personajes...</div>';
 
     try {
-        const response = await fetch(`${API_URL}?page=${pagina}`);
+        const response = await fetch(`${API_URL}`);
         
         if (!response.ok) {
             throw new Error('Error al cargar los personajes');
         }
 
         const data = await response.json();
-
         mostrarPersonajes(data.results);
 
     } catch (error) {
@@ -36,10 +36,8 @@ async function buscarPersonajes() {
     const gender = document.getElementById('gender');
 
     const resultado = document.getElementById('output');
-    resultado.innerHTML = '<div class="loading">🔍 Buscando personajes...</div>';
-
     // Construir URL con parámetros
-    let urlBusqueda = `${API_URL}`; // Cambiado de 'url' a 'urlBusqueda'
+    let urlBusqueda = `${API_URL}+ "/?" + nombre.value + status.value +species.value + gender.value`; // Cambiado de 'url' a 'urlBusqueda'
 
     try {
         const response = await fetch(urlBusqueda);
