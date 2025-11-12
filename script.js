@@ -29,12 +29,12 @@ async function obtenerPersonajes (name, status){
 async function verPersonajes (name, status) {
     
     // Obtener los personajes filtrados
-    const personajesElemento = await obtenerPersonajes(name, status);
+    const personajesObtenidos = await obtenerPersonajes(name, status);
     
     personajesElemento.innerHTML = '';
 
     // renderizar los personajes
-    for( let personaje of personajesElemento ){
+    for( let personaje of personajesObtenidos ){
         const tarjeta = document.createElement('div');
         tarjeta.classList.add('tarjetaPersonaje');
 
@@ -45,7 +45,6 @@ async function verPersonajes (name, status) {
             <p> Especie: ${personaje.species} </p>
         `;
         personajesElemento.appendChild(tarjeta);
-
     }
 
 }
@@ -53,9 +52,9 @@ async function verPersonajes (name, status) {
 verPersonajes();
 
 personajesElemento.addEventListener('input', () => {
-    verPersonajes(personajesElemento.value, estadoFiltroElemento .value );
+verPersonajes(personajesElemento.value,estadoFiltroElemento.value);
 });
 
-estadoFiltroElemento .addEventListener('change', () => {
-    verPersonajes(personajesElemento.value, estadoFiltroElemento .value );
+estadoFiltroElemento.addEventListener('change', () => {
+verPersonajes(personajesElemento.value,estadoFiltroElemento.value);
 });

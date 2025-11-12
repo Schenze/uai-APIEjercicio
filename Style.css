@@ -3,7 +3,7 @@ h1, #filtros{
     text-align: center;
 }
 
-#filtros input, #filtros #estadoFiltro {
+#filtros input, #filtros #estadoFiltro{
     padding: 8px 16px;
     margin: 10px;
     border: 0;
@@ -19,13 +19,13 @@ h1, #filtros{
     margin: 0 auto;   
 }
 
-#personajes {
+#personajes{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.tarjetaPersonaje {
+.tarjetaPersonaje{
     width: 200px;
     margin: 5px;
     padding: 10px;
