@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rick y morty</title>
+    <title >Personajes de Rick y Morty</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="normalize.css">
 </head>
 <body>
 
-    <h1>Buscador de rick</h1>
+    <h1>Buscador de personajes de Rick and Morty</h1>
 
     <div id="filtros">
         <input type="text" id="nombreFiltro" placeholder="Filtrado por nombre" >
+        <input type="text" id="especieFiltro" placeholder="Filtrado por especie" >
+        <input type="text" id="tipoFiltro" placeholder="Filtrado por tipo" >
 
         <select id="estadoFiltro">
             <option value="">Filtrar por estado</option>
@@ -19,7 +22,14 @@
             <option value="dead">Muerto</option>
             <option value="unknown">Desconocido</option>
         </select>
-        
+            <select id="generoFiltro">
+            <option value="">Filtrar por genero</option>
+            <option value="male">Masculino</option>
+            <option value="female">Femenino</option>
+            <option value="genderless">Sin genero</option>
+            <option value="unknown">Desconocido</option>
+        </select>
+
     </div>
 
     <div class="divcontenedor">

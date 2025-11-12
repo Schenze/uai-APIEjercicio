@@ -1,15 +1,21 @@
 
-h1, #filtros{
+h1{
     text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 30px;
 }
 
-#filtros input, #filtros #estadoFiltro{
+#filtros input, #filtros, #estadoFiltro, #generoFiltro{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     padding: 8px 16px;
     margin: 10px;
     border: 0;
-    font-size: 18px;
+    font-size: 17px;
     border: 1px solid gainsboro;
     border-radius: 5px;
+    font-family:sans-serif;
 } 
 
 .divcontenedor{
@@ -23,6 +29,9 @@ h1, #filtros{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 10px solid blue;
+    background-color: black;
 }
 
 .tarjetaPersonaje{
@@ -30,10 +39,38 @@ h1, #filtros{
     margin: 5px;
     padding: 10px;
     background-color: white;
-    border-radius: 8px;
-    
+    border: 10px;   
 }
 
 .tarjetaPersonaje img{
     width: 100%;
+}
+
+@media screen and (max-width: 720px)
+{
+    h1{
+        display:none;
+    }
+    #filtros input, #filtros, #estadoFiltro, #generoFiltro{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 8px 16px;
+    margin: 10px;
+    border: 0;
+    font-size: 20px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    } 
+
+    .tarjetaPersonaje{
+    width: 300px;
+    margin: 5px;
+    padding: 10px;
+    background-color: white;
+    border: 10px;
+    font-size: 20px;
+    font-family:sans-serif;   
+    }
 }
